@@ -1,0 +1,564 @@
+1.
+func main() {
+	var input string
+
+	fmt.Print("Digite uma string: ")
+	fmt.Scanln(&input)
+
+	result := strings.ToUpper(input)
+
+	fmt.Println("Resultado:", result)
+}
+2.func main() {
+	var input string
+
+	fmt.Print("Digite uma string: ")
+	fmt.Scanln(&input)
+
+	result := removeEspacos(input)
+
+	fmt.Println("Resultado:", result)
+}
+
+func removeEspacos(str string) string {
+	return strings.ReplaceAll(str, " ", "")
+}
+3.func main() {
+	var input, charToReplace, replacement string
+
+	fmt.Print("Digite uma string: ")
+	fmt.Scanln(&input)
+
+	fmt.Print("Digite o caractere a ser substituído: ")
+	fmt.Scanln(&charToReplace)
+
+	fmt.Print("Digite o caractere de substituição: ")
+	fmt.Scanln(&replacement)
+
+	result := substituteChar(input, charToReplace, replacement)
+
+	fmt.Println("Resultado:", result)
+}
+
+func substituteChar(str, charToReplace, replacement string) string {
+	return strings.ReplaceAll(str, charToReplace, replacement)
+}
+4.func main() {
+	var str1, str2 string
+
+	fmt.Print("Digite a primeira string: ")
+	fmt.Scanln(&str1)
+
+	fmt.Print("Digite a segunda string: ")
+	fmt.Scanln(&str2)
+
+	if str1 == str2 {
+		fmt.Println("As strings são iguais.")
+	} else {
+		fmt.Println("As strings são diferentes.")
+	}
+}
+5.
+func main() {
+	var input string
+
+	fmt.Print("Digite um número em ponto flutuante: ")
+	fmt.Scanln(&input)
+
+	if isValidFloat(input) {
+		fmt.Println("É um número válido em ponto flutuante.")
+	} else {
+		fmt.Println("Não é um número válido em ponto flutuante.")
+	}
+}
+
+func isValidFloat(str string) bool {
+	_, err := strconv.ParseFloat(str, 64)
+	return err == nil
+}
+6.
+func main() {
+	var input string
+
+	fmt.Print("Digite uma frase: ")
+	fmt.Scanln(&input)
+
+	wordCount := countWords(input)
+	fmt.Printf("A frase contém %d palavras.\n", wordCount)
+}
+
+func countWords(str string) int {
+	trimmedStr := strings.TrimSpace(str)
+	if trimmedStr == "" {
+		return 0
+	}
+
+	words := strings.Fields(trimmedStr)
+	return len(words)
+}
+7.func main() {
+	var input string
+
+	fmt.Print("Digite uma string: ")
+	fmt.Scanln(&input)
+
+	if containsNumber(input) {
+		fmt.Println("A string contém pelo menos um número.")
+	} else {
+		fmt.Println("A string não contém números.")
+	}
+}
+
+func containsNumber(str string) bool {
+	for _, char := range str {
+		if unicode.IsDigit(char) {
+			return true
+		}
+	}
+	return false
+}
+8.func main() {
+	var input string
+
+	fmt.Print("Digite uma string: ")
+	fmt.Scanln(&input)
+
+	reversedString := reverseString(input)
+	fmt.Println("String invertida:", reversedString)
+}
+
+func reverseString(str string) string {
+	runes := []rune(str)
+	length := len(runes)
+
+	for i := 0; i < length/2; i++ {
+		runes[i], runes[length-1-i] = runes[length-1-i], runes[i]
+	}
+
+	return string(runes)
+}
+9.func main() {
+	var input string
+	var oldChar, newChar string
+
+	fmt.Print("Digite uma string: ")
+	fmt.Scanln(&input)
+
+	fmt.Print("Digite a letra a ser substituída: ")
+	fmt.Scanln(&oldChar)
+
+	fmt.Print("Digite a letra de substituição: ")
+	fmt.Scanln(&newChar)
+
+	newString := strings.ReplaceAll(input, oldChar, newChar)
+	fmt.Println("Nova string:", newString)
+}
+10.func main() {
+	var str1, str2 string
+
+	
+	fmt.Print("Digite a primeira string: ")
+	fmt.Scanln(&str1)
+
+	fmt.Print("Digite a segunda string: ")
+	fmt.Scanln(&str2)
+
+
+	str1 = strings.ReplaceAll(str1, " ", "")
+	str2 = strings.ReplaceAll(str2, " ", "")
+
+	
+	if len(str1) != len(str2) {
+		fmt.Println("As strings não são anagramas.")
+		return
+	}
+
+	
+	slice1 := strings.Split(str1, "")
+	slice2 := strings.Split(str2, "")
+
+	
+	sort.Strings(slice1)
+	sort.Strings(slice2)
+
+	
+	isAnagram := true
+	for i := 0; i < len(slice1); i++ {
+		if slice1[i] != slice2[i] {
+			isAnagram = false
+			break
+		}
+	}
+
+	
+	if isAnagram {
+		fmt.Println("As strings são anagramas.")
+	} else {
+		fmt.Println("As strings não são anagramas.")
+	}
+}
+11.func main() {
+	var str string
+
+
+	fmt.Print("Digite uma string: ")
+	fmt.Scanln(&str)
+
+	
+	str = removeVogais(str)
+
+	fmt.Println("Resultado:", str)
+}
+
+
+func removeVogais(s string) string {
+	vogais := "aeiouAEIOU"
+	resultado := strings.Builder{}
+
+
+	for _, char := range s {
+		// Verifica se o caractere não é uma vogal
+		if !strings.ContainsRune(vogais, char) {
+			resultado.WriteRune(char)
+		}
+	}
+
+	return resultado.String()
+}
+12.func main() {
+	var str string
+
+	
+	fmt.Scanln(&str)
+
+	isPalindromo := verificarPalindromo(str)
+
+
+	if isPalindromo {
+		fmt.Println("A string é um palíndromo.")
+	} else {
+		fmt.Println("A string não é um palíndromo.")
+	}
+}
+
+
+func verificarPalindromo(s string) bool {
+	// Remove espaços em branco e converte para letras minúsculas
+	s = strings.ToLower(strings.ReplaceAll(s, " ", ""))
+
+
+	reverse := reverseString(s)
+return s == reverse
+}
+
+
+func reverseString(s string) string {
+	runes := []rune(s)
+	length := len(runes)
+
+	for i, j := 0, length-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+
+	return string(runes)
+13.func main() {
+	var str string
+	fmt.Print("Digite uma string: ")
+	fmt.Scanln(&str)
+
+	
+	isCrescente := verificarSequenciaCrescente(str)
+
+	if isCrescente {
+		fmt.Println("A string é uma sequência numérica crescente.")
+	} else {
+		fmt.Println("A string não é uma sequência numérica crescente.")
+	}
+}
+
+
+func verificarSequenciaCrescente(s string) bool {
+	length := len(s)
+
+	
+	if length < 2 {
+		return false
+	}
+
+	
+	prev, err := strconv.Atoi(string(s[0]))
+	if err != nil {
+		return false
+	}
+
+
+	for i := 1; i < length; i++ {
+		// Converte o caractere atual para inteiro
+		curr, err := strconv.Atoi(string(s[i]))
+		if err != nil {
+			return false
+		}
+
+	
+		if curr <= prev {
+			return false
+		}
+
+		prev = curr
+	}
+
+	return true
+}
+14.package main
+
+import (
+	"fmt"
+	"strconv"
+)
+
+func main() {
+	var str string
+
+	fmt.Print("Digite uma string: ")
+	fmt.Scanln(&str)
+
+	
+	isDecrescente := verificarSequenciaDecrescente(str)
+
+
+	if isDecrescente {
+		fmt.Println("A string é uma sequência numérica decrescente.")
+	} else {
+		fmt.Println("A string não é uma sequência numérica decrescente.")
+	}
+}
+
+
+func verificarSequenciaDecrescente(s string) bool {
+	length := len(s)
+
+	
+	if length < 2 {
+		return false
+	}
+
+	
+	prev, err := strconv.Atoi(string(s[0]))
+	if err != nil {
+		return false
+	}
+
+	
+	for i := 1; i < length; i++ {
+	
+	
+
+15.package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func main() {
+	var input string
+	fmt.Print("Digite uma frase: ")
+	fmt.Scanln(&input)
+
+	output := replaceVowels(input)
+	fmt.Println("Frase com vogais substituídas:", output)
+}
+
+func replaceVowels(str string) string {
+	vowels := "aeiouAEIOU"
+	result := ""
+
+	for _, char := range str {
+		if strings.ContainsRune(vowels, char) {
+			result += "*"
+		} else {
+			result += string(char)
+		}
+	}
+
+	return result
+}
+
+16.package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func main() {
+	var str1, str2 string
+	fmt.Print("Digite a primeira string: ")
+	fmt.Scanln(&str1)
+	fmt.Print("Digite a segunda string: ")
+	fmt.Scanln(&str2)
+
+	if isSubstring(str1, str2) {
+		fmt.Println("A segunda string é uma substring da primeira.")
+	} else {
+		fmt.Println("A segunda string não é uma substring da primeira.")
+	}
+}
+
+func isSubstring(str1, str2 string) bool {
+	return strings.Contains(str1, str2)
+}
+
+17.package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	var input string
+	fmt.Print("Digite uma frase: ")
+	fmt.Scanln(&input)
+
+	uniqueLetters := findUniqueLetters(input)
+	fmt.Println("Letras únicas:", uniqueLetters)
+}
+
+func findUniqueLetters(str string) string {
+	letterCount := make(map[rune]int)
+
+	// Contar a ocorrência de cada letra na string
+	for _, char := range str {
+		letterCount[char]++
+	}
+
+	uniqueLetters := ""
+
+	// Iterar sobre as letras da string original
+	// e
+
+18.package main
+
+import (
+	"fmt"
+	"regexp"
+)
+
+func main() {
+	var input string
+	fmt.Print("Digite uma string: ")
+	fmt.Scanln(&input)
+
+	if containsOnlyNumbers(input) {
+		fmt.Println("A string contém somente números.")
+	} else {
+		fmt.Println("A string não contém somente números.")
+	}
+}
+
+func containsOnlyNumbers(str string) bool {
+	regex := regexp.MustCompile("^[0-9]+$")
+	return regex.MatchString(str)
+}
+
+19.package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func main() {
+	var input string
+	fmt.Print("Digite uma string: ")
+	fmt.Scanln(&input)
+
+	reversed := reverseString(input)
+	fmt.Println("String invertida:", reversed)
+}
+
+func reverseString(str string) string {
+	runes := []rune(str)
+	length := len(runes)
+
+	// Inverter a ordem dos caracteres
+	for i, j := 0, length-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+
+	return string(runes)
+}
+
+20.package main
+
+import (
+	"fmt"
+	"strings"
+	"unicode"
+)
+
+func main() {
+	var input string
+	fmt.Print("Digite uma string: ")
+	fmt.Scanln(&input)
+
+	if isCamelCase(input) {
+		wordCount := countWords(input)
+		fmt.Printf("A string está em camelCase e contém %d palavra(s).\n", wordCount)
+	} else {
+		fmt.Println("A string não está em camelCase.")
+	}
+}
+
+Bônus.package main
+
+import (
+	"fmt"
+	"strings"
+	"unicode"
+)
+
+func main() {
+	var input string
+	fmt.Print("Digite uma string: ")
+	fmt.Scanln(&input)
+
+	if isCamelCase(input) {
+		wordCount := countWords(input)
+		fmt.Printf("A string está em camelCase e contém %d palavra(s).\n", wordCount)
+	} else {
+		fmt.Println("A string não está em camelCase.")
+	}
+}
+
+func isCamelCase(str string) bool {
+	if len(str) == 0 {
+		return false
+	}
+
+	firstChar := rune(str[0])
+	if !unicode.IsUpper(firstChar) {
+		return false
+	}
+
+	for _, char := range str {
+		if unicode.IsSpace(char) {
+			return false
+		}
+	}
+
+	return true
+}
+
+func countWords(str string) int {
+	words := strings.Split(str, "")
+
+	count := 0
+	for _, word := range words {
+		if word != "" && unicode.IsUpper(rune(word[0])) {
+			count++
+		}
+	}
+
+	return count
+}
